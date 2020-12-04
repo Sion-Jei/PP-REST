@@ -2,7 +2,8 @@ const express = require('express'),
       bodyParser = require('body-parser'),
       jwt = require('jsonwebtoken'),
       config = require('./configs/config'),
-      app = express();
+      app = express(),
+      port = 3009;
 
 app.set('x-api-key', config.key);
 // 2
@@ -17,8 +18,12 @@ app.use(express.urlencoded({extended: false}));//Puede recibir formularios pero 
 //routes
 app.use(require('./routes/index'));//App requiere el contenido en index de routes
 
-app.listen(3002);//Define el port en donde escucha app. El server arranca con "npm run dev"
+//app.listen(3004);//Define el port en donde escucha app. El server arranca con "npm run dev"
+app.listen(port, (req, res) => {
+  console.log(`Server on port ${port}`);
+})
 
+//AUTENTICACION
 app.post('/autenticar', (req, res) => {
     
     if( req.body.api === "app1") {
@@ -33,7 +38,7 @@ app.post('/autenticar', (req, res) => {
    token: token
   });
     } else {
-        res.json({ mensaje: "Usuario o contraseña incorrectos"})
+        res.status(412).json(({ mensaje: "Usuario o contraseña incorrectos"}));
     }
 })
 
@@ -58,6 +63,7 @@ rutasProtegidas.use((req, res, next) => {
     }
  });
 
-console.log('Server on port 3001');//Entrega un mensaje por consola sobre el estado del servidor
+//console.log('Server on port 3002');//Entrega un mensaje por consola sobre el estado del servidor
 
 //HOLAHOLA
+

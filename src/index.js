@@ -58,16 +58,6 @@ rutasProtegidas.use((req, res, next) => {
     }
  });
 
- app.get('/datos', rutasProtegidas, (req, res) => {
-    const datos = [
-     { id: 1, nombre: "Asfo" },
-     { id: 2, nombre: "Denisse" },
-     { id: 3, nombre: "Carlos" }
-    ];
-    
-    res.json(datos);
-   });
-
 console.log('Server on port 3001');//Entrega un mensaje por consola sobre el estado del servidor
 
 //HOLAHOLA

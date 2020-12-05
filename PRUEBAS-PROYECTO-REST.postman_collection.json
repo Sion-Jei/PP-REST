@@ -1,0 +1,193 @@
+{
+	"info": {
+		"_postman_id": "96934d05-8fab-4ddc-bd78-d0bf141ad5c3",
+		"name": "PRUEBAS-PROYECTO-REST",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:3004/autenticar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "x-api-key",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaGVjayI6dHJ1ZSwiaWF0IjoxNjA3MTAzOTM4LCJleHAiOjE2MDcxMDUzNzh9.u2OAt-eq9s4fV8dSQKqboWin5wP46SNxlM5aR2lNNzA",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user\":\"user\",\n    \"pass\":\"123\"\n}"
+				},
+				"url": {
+					"raw": "localhost:3004/autenticar",
+					"host": [
+						"localhost"
+					],
+					"port": "3004",
+					"path": [
+						"autenticar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3004/api/v1/countries/:code/info",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3004/api/v1/countries/:code/info",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3004",
+					"path": [
+						"api",
+						"v1",
+						"countries",
+						":code",
+						"info"
+					],
+					"variable": [
+						{
+							"key": "code",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/v1/countries/all",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/api/v1/countries/all",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"countries",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3004/api/v1/indicators/:countrycode/:indicatorcode/:year",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3004/api/v1/indicators/:countrycode/:indicatorcode/:year",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3004",
+					"path": [
+						"api",
+						"v1",
+						"indicators",
+						":countrycode",
+						":indicatorcode",
+						":year"
+					],
+					"variable": [
+						{
+							"key": "countrycode",
+							"value": "0"
+						},
+						{
+							"key": "indicatorcode",
+							"value": "1"
+						},
+						{
+							"key": "year",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3004/api/v1/indicators/info",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n    \"countryCode\": \"0\",\n    \"indicatorCode\": \"3\",\n    \"startYear\": \"4\",\n    \"endYear\": \"2\"\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3004/api/v1/indicators/info",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3004",
+					"path": [
+						"api",
+						"v1",
+						"indicators",
+						"info"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -3,7 +3,7 @@ const express = require('express'),
       jwt = require('jsonwebtoken'),
       config = require('./configs/config'),
       app = express(),
-      port = 3004;
+      port = 3007;
 
 app.set('x-api-key', config.key);
 

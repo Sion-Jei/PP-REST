@@ -6,13 +6,12 @@ const pool= new Pool({
     host: 'localhost',
     user: 'postgres',
     password: 'admin',
-    database: 'paralela2',
+    database: 'dbparalela',
     port: '5432'
 });
 
 const getCountryByCode = async(req, res) => {//Busca el codigo en la tabla
     if ([req.params.code] < 1) {
-        console.log("pase por if");
         res.status(400).json("Error en el parametro de entrada");
     }
     try {
@@ -36,7 +35,6 @@ const getAllCountries = async(req, res) => {//Entrega todo en la tabla
 
 const getIndicators = async(req, res) => {
     if ([req.params.countrycode] < 1 || [req.params.indicatorcode] < 1 || [req.params.year] < 1) {
-        console.log("pase por if2222222");
         res.status(400).json("Error en el parametro de entrada");
     }
     try {
@@ -53,7 +51,6 @@ const getIndicators = async(req, res) => {
 const postIndicators = async(req, res)=>{
     const { countryCode, indicatorCode, startYear, endYear }= req.body;
     if ([countryCode] < 1 || [indicatorCode] < 1 || [startYear] < 1 || [endYear] < 1) {
-        console.log("pase por if33333333333");
         res.status(400).json("Error en el parametro de entrada");
     }
     try {
@@ -75,4 +72,3 @@ module.exports = {
     postIndicators
 }
 
-//123123

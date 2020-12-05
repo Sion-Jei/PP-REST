@@ -1,0 +1,97 @@
+
+
+CREATE DATABASE dbparalela;
+
+
+ALTER DATABASE dbparalela OWNER TO postgres;
+
+\connect dbparalela
+
+
+CREATE TABLE Countries (
+    abbr text NOT NULL,
+    code text NOT NULL,
+    currencyCode text NOT NULL,
+    currencyName text NOT NULL,
+    lang text NOT NULL,
+    name text NOT NULL
+);
+
+
+ALTER TABLE Countries OWNER TO postgres;
+
+
+CREATE TABLE Indicators (
+    countrycode text NOT NULL,
+    indicatorcode text NOT NULL,
+    year text NOT NULL,
+    indicatorname text NOT NULL,
+    indicatorunit text NOT NULL,
+    indicatorvalue text NOT NULL
+);
+
+
+ALTER TABLE Indicators OWNER TO postgres;
+
+INSERT INTO Countries (abbr, code, currencyCode, currencyName, lang, name) VALUES ('AFG', 'AF', 'AFN', 'Afgani', 'pastú', 'Afganistan');
+INSERT INTO Countries (abbr, code, currencyCode, currencyName, lang, name) VALUES ('ALB', 'AL', 'ALL', 'Lek', 'Albanes', 'Albania');
+INSERT INTO Countries (abbr, code, currencyCode, currencyName, lang, name) VALUES ('DEU', 'DE', 'EUR', 'Euro', 'Aleman', 'Alemania');
+
+INSERT INTO Indicators  (countrycode, indicatorcode, year, indicatorname, indicatorunit, indicatorvalue) VALUES 
+('AF', 'PIB', '2005','Producto Interno Bruto','US$','6209137624.77181'),
+('AF', 'PIB', '2006','Producto Interno Bruto','US$','6971285594.68013'), 
+('AF', 'PIB', '2007','Producto Interno Bruto','US$','9747879531.86311'),
+('AF', 'PIB', '2008','Producto Interno Bruto','US$','10109225813.6696'),
+('AF', 'PIB', '2009','Producto Interno Bruto','US$','12439087076.7667'),
+('AF', 'PIB', '2010','Producto Interno Bruto','US$','15856574731.4411'),
+('AF', 'PIB', '2011','Producto Interno Bruto','US$','17804292964.1045'),
+('AF', 'PIB', '2012','Producto Interno Bruto','US$','20001598505.7042'),
+('AF', 'PIB', '2013','Producto Interno Bruto','US$','20561069558.2152'),
+('AF', 'PIB', '2014','Producto Interno Bruto','US$','20484885119.7348'),
+('AF', 'PIB', '2015','Producto Interno Bruto','US$','19907111418.9938'),
+('AF', 'PIB', '2016','Producto Interno Bruto','US$','19362642266.6484'),
+('AF', 'PIB', '2017','Producto Interno Bruto','US$','20191760000.0587'),
+('AF', 'PIB', '2018','Producto Interno Bruto','US$','19484384936.6312'),
+('AF', 'PIB', '2019','Producto Interno Bruto','US$','19101353832.7371'), 
+('DE', 'IFL', '2005','Inflación','%','1.54690965159041'),
+('DE', 'IFL', '2006','Inflación','%','1.57742825864226'), 
+('DE', 'IFL', '2007','Inflación','%','2.29834179696226'),
+('DE', 'IFL', '2008','Inflación','%','2.62838174873985'),
+('DE', 'IFL', '2009','Inflación','%','0.31273762987172'),
+('DE', 'IFL', '2010','Inflación','%','1.10380916115812'),
+('DE', 'IFL', '2011','Inflación','%','2.07517452479837'),
+('DE', 'IFL', '2012','Inflación','%','2.0084909216701'),
+('DE', 'IFL', '2013','Inflación','%','1.5047209800535'),
+('DE', 'IFL', '2014','Inflación','%','0.906797948515676'),
+('DE', 'IFL', '2015','Inflación','%','0.51442053951781'),
+('DE', 'IFL', '2016','Inflación','%','0.49174862477081'),
+('DE', 'IFL', '2017','Inflación','%','1.50949655801608'),
+('DE', 'IFL', '2018','Inflación','%','1.73216766075662'),
+('DE', 'IFL', '2019','Inflación','%','1.4456670146976'),
+('AL', 'PRF', '2005','Presión Fiscal','%','58.6'),
+('AL', 'PRF', '2006','Presión Fiscal','%','56.9'), 
+('AL', 'PRF', '2007','Presión Fiscal','%','46.3'),
+('AL', 'PRF', '2008','Presión Fiscal','%','50'),
+('AL', 'PRF', '2009','Presión Fiscal','%','44'),
+('AL', 'PRF', '2010','Presión Fiscal','%','40.6'),
+('AL', 'PRF', '2011','Presión Fiscal','%','38.7'),
+('AL', 'PRF', '2012','Presión Fiscal','%','38.8'),
+('AL', 'PRF', '2013','Presión Fiscal','%','31.7'),
+('AL', 'PRF', '2014','Presión Fiscal','%','31.6'),
+('AL', 'PRF', '2015','Presión Fiscal','%','36.9'),
+('AL', 'PRF', '2016','Presión Fiscal','%','36.9'),
+('AL', 'PRF', '2017','Presión Fiscal','%','37.3'),
+('AL', 'PRF', '2018','Presión Fiscal','%','37.3'),
+('AL', 'PRF', '2019','Presión Fiscal','%','36.6');
+
+ALTER TABLE ONLY Countries
+    ADD CONSTRAINT Countries_pkey PRIMARY KEY (code);
+
+
+CREATE INDEX fki_dab ON Indicators USING btree (countrycode);
+
+
+ALTER TABLE ONLY Indicators
+    ADD CONSTRAINT fkcountryCode FOREIGN KEY (countrycode) REFERENCES Countries(code);
+
+

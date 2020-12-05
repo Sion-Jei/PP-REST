@@ -3,12 +3,12 @@ const express = require('express'),
       jwt = require('jsonwebtoken'),
       config = require('./configs/config'),
       app = express(),
-      port = 3003;
+      port = 3004;
 
 app.set('x-api-key', config.key);
-// 2
+
 app.use(bodyParser.urlencoded({ extended: true }));
-// 3
+
 app.use(bodyParser.json());
 
 //middlewares
@@ -16,7 +16,7 @@ app.use(express.json());//Permite recibir datos json
 app.use(express.urlencoded({extended: false}));//Puede recibir formularios pero solo datos
 
 
-//app.listen(3004);//Define el port en donde escucha app. El server arranca con "npm run dev"
+//Define el port en donde escucha app. El server arranca con "npm run dev"
 app.listen(port, (req, res) => {
   console.log(`Server on port ${port}`);
 })
@@ -68,7 +68,4 @@ app.get('/api/v1/countries/:code/info',rutasProtegidas,getCountryByCode);
 app.get('/api/v1/countries/all',rutasProtegidas,getAllCountries);
 app.get('/api/v1/indicators/:countrycode/:indicatorcode/:year',rutasProtegidas,getIndicators);
 app.post('/api/v1/indicators/info',rutasProtegidas,postIndicators);
-//console.log('Server on port 3002');//Entrega un mensaje por consola sobre el estado del servidor
-
-//HOLAHOLA
 

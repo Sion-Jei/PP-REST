@@ -3,7 +3,7 @@ const express = require('express'),
       jwt = require('jsonwebtoken'),
       config = require('./configs/config'),
       app = express(),
-      port = 3009;
+      port = 3003;
 
 app.set('x-api-key', config.key);
 // 2
@@ -15,8 +15,6 @@ app.use(bodyParser.json());
 app.use(express.json());//Permite recibir datos json
 app.use(express.urlencoded({extended: false}));//Puede recibir formularios pero solo datos
 
-//routes
-app.use(require('./routes/index'));//App requiere el contenido en index de routes
 
 //app.listen(3004);//Define el port en donde escucha app. El server arranca con "npm run dev"
 app.listen(port, (req, res) => {
@@ -26,7 +24,7 @@ app.listen(port, (req, res) => {
 //AUTENTICACION
 app.post('/autenticar', (req, res) => {
     
-    if( req.body.api === "app1") {
+    if( req.body.user === "user" && req.body.pass === "123") {
   const payload = {
    check:  true
   };
@@ -63,6 +61,13 @@ rutasProtegidas.use((req, res, next) => {
     }
  });
 
+const { getCountryByCode,getAllCountries,getIndicators,postIndicators } = require('./controllers/index.controller');//Importo funciones
+
+//Uso las funciones en las rutas solicitadas
+app.get('/api/v1/countries/:code/info',rutasProtegidas,getCountryByCode);
+app.get('/api/v1/countries/all',rutasProtegidas,getAllCountries);
+app.get('/api/v1/indicators/:countrycode/:indicatorcode/:year',rutasProtegidas,getIndicators);
+app.post('/api/v1/indicators/info',rutasProtegidas,postIndicators);
 //console.log('Server on port 3002');//Entrega un mensaje por consola sobre el estado del servidor
 
 //HOLAHOLA

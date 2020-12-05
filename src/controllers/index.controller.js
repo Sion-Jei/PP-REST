@@ -1,3 +1,4 @@
+const { restart } = require('nodemon');
 const { Pool } = require('pg'); //Permite conectarse a postgres
 
 //Hago conexion con la base de datos de postgres
@@ -10,8 +11,17 @@ const pool= new Pool({
 });
 
 const getCountryByCode = async(req, res) => {//Busca el codigo en la tabla
-    const response = await pool.query('SELECT * FROM Countries WHERE code= $1', [req.params.code]);
-    res.status(200).json(response.rows);
+    if ([req.params.code] < 1) {
+        console.log("pase por if");
+        res.status(400).json("Error en el parametro de entrada");
+    }
+    try {
+        const response = await pool.query('SELECT * FROM Countries WHERE code= $1', [req.params.code]);
+        res.status(200).json(response.rows);
+    }catch(e){
+        
+        res.status(500).json(e);
+    }
 }
 
 const getAllCountries = async(req, res) => {//Entrega todo en la tabla
